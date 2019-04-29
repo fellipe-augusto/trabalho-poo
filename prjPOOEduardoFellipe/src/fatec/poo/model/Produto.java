@@ -57,5 +57,4 @@ public class Produto {
     public double getEstoqueMinimo() {
         return estoqueMinimo;
     }
-    
 }

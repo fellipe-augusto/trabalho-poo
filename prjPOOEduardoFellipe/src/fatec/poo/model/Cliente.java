@@ -32,12 +32,11 @@ public class Cliente extends Pessoa{
     }
 
     public void setLimiteDisp(double limiteDisp) {
-        this.limiteDisp = limiteDisp;
+        this.limiteDisp -= limiteDisp;
     }
     
     public void addPedido(Pedido p){
         pedidos.add(p);
         p.setCliente(this);
     }
-    
 }

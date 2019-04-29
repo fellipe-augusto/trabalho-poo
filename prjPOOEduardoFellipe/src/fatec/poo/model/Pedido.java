@@ -60,5 +60,9 @@ public class Pedido {
     public void addItemPedido(ItemPedido ip){
         itensPedido.add(ip);
         ip.setPedido(this);
+        
+        if(formaPagto == true){
+            cliente.setLimiteDisp(ip.calcValorItemPedido());
+        }
     }
 }

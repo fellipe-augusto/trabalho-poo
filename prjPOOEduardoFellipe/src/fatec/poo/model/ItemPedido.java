@@ -19,8 +19,9 @@ public class ItemPedido {
 
     public void setQtdeVendida(double qtdeVendida) {
         this.qtdeVendida = qtdeVendida;
+        produto.setQtdeEstoque(produto.getQtdeEstoque() - qtdeVendida);
     }
-
+    
     public int getSequencia() {
         return sequencia;
     }
@@ -33,4 +34,7 @@ public class ItemPedido {
         this.pedido = p;
     }
     
+    public double calcValorItemPedido(){
+        return produto.getPreco() * qtdeVendida;
+    }
 }
