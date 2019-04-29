@@ -5,6 +5,7 @@ import java.util.ArrayList;
  *
  * @author Eduardo Ribeiro
  */
+
 public class Vendedor extends Pessoa{
     
     private double salarioBase;
@@ -31,5 +32,10 @@ public class Vendedor extends Pessoa{
 
     public void setTaxaComissao(double taxaComissao) {
         this.taxaComissao = taxaComissao/100;
-    } 
+    }
+    
+    public void addPedido(Pedido p){
+        pedidos.add(p);
+        p.setVendedor(this);
+    }
 }

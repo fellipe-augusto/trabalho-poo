@@ -4,6 +4,7 @@ package fatec.poo.model;
  *
  * @author Fellipe Augusto
  */
+
 public class Produto {
     private String codigo;
     private String descricao;
@@ -56,6 +57,5 @@ public class Produto {
     public double getEstoqueMinimo() {
         return estoqueMinimo;
     }
-    
     
 }

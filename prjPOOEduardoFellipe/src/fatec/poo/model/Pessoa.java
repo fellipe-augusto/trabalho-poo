@@ -4,6 +4,7 @@ package fatec.poo.model;
  *
  * @author Eduardo Ribeiro
  */
+
 public class Pessoa {
     
     private String cpf;
@@ -83,8 +84,4 @@ public class Pessoa {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
-    
-    
-    
 }

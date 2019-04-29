@@ -1,14 +1,15 @@
 package fatec.poo.model;
-import java.util.ArrayList;
 
 /**
  *
  * @author Fellipe Augusto
  */
+
 public class ItemPedido {
     private int sequencia;
     private double qtdeVendida;
     private Produto produto;
+    private Pedido pedido;
 
     public ItemPedido(int sequencia, double qtdeVendida, Produto produto) {
         this.sequencia = sequencia;
@@ -28,5 +29,8 @@ public class ItemPedido {
         return qtdeVendida;
     }
     
+    public void setPedido(Pedido p){
+        this.pedido = p;
+    }
     
 }

@@ -5,11 +5,14 @@ import java.util.ArrayList;
  *
  * @author Fellipe Augusto
  */
+
 public class Pedido {
     private String numero;
     private String dataEmissao;
     private boolean formaPagto;
     private boolean situacao;
+    private Cliente cliente;
+    private Vendedor vendedor;
     private ArrayList<ItemPedido> itensPedido;
 
     public Pedido(String numero, String dataEmissao) {
@@ -44,5 +47,18 @@ public class Pedido {
 
     public boolean isSituacao() {
         return situacao;
+    }
+    
+    public void setCliente(Cliente c){
+        this.cliente = c;
+    }
+    
+    public void setVendedor(Vendedor v){
+        this.vendedor = v;
+    }
+    
+    public void addItemPedido(ItemPedido ip){
+        itensPedido.add(ip);
+        ip.setPedido(this);
     }
 }
