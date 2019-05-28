@@ -5,6 +5,7 @@
  */
 package fatec.poo.control;
 
+import fatec.poo.model.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,16 +19,20 @@ public class DaoProduto {
     
     private Connection conn;
     
-    public DaoDepartamento(Connection conn) {
+    public DaoProduto(Connection conn) {
          this.conn = conn;
     }
     
-    public void inserir(Departamento departamento) {
+    public void inserir(Produto produto) {
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("INSERT INTO tbdepartamento(Sigla_Dep, Nome_Dep) VALUES(?,?)");
-            ps.setString(1, departamento.getSigla());
-            ps.setString(2, departamento.getNome());
+            ps = conn.prepareStatement("INSERT INTO pooProduto(codigo, descricao, qtdeEstoque, unidadeMedida, preco, estoqueMinimo) VALUES(?,?,?,?,?,?)");
+            ps.setString(1, produto.getCodigo());
+            ps.setString(2, produto.getDescricao());
+            ps.setDouble(3, produto.getQtdeEstoque());
+            ps.setString(4, produto.getUnidadeMedida());
+            ps.setDouble(5, produto.getPreco());
+            ps.setDouble(6, produto.getEstoqueMinimo());
                       
             ps.execute();
         } catch (SQLException ex) {
@@ -35,14 +40,18 @@ public class DaoProduto {
         }
     }
     
-    public void alterar(Departamento departamento) {
+    public void alterar(Produto produto) {
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("UPDATE tbdepartamento set Nome_Dep = ?" +
-                                                 "where Sigla_Dep = ?");
+            ps = conn.prepareStatement("UPDATE pooProduto set descricao = ?, qtdeEstoque = ?, unidadeMedida = ?, preco = ?, estoqueMinimo = ?" +
+                                                 "where codigo = ?");
             
-            ps.setString(1, departamento.getNome());
-            ps.setString(2, departamento.getSigla());
+            ps.setString(1, produto.getDescricao());
+            ps.setDouble(2, produto.getQtdeEstoque());
+            ps.setString(3, produto.getUnidadeMedida());
+            ps.setDouble(4, produto.getPreco());
+            ps.setDouble(5, produto.getEstoqueMinimo());
+            ps.setString(6, produto.getCodigo());
            
             ps.execute();
         } catch (SQLException ex) {
@@ -50,33 +59,37 @@ public class DaoProduto {
         }
     }
         
-     public  Departamento consultar (String sigla) {
-        Departamento d = null;
+     public  Produto consultar (String codigo) {
+        Produto p = null;
        
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("SELECT * from tbDepartamento where " +
-                                                 "Sigla_Dep = ?");
+            ps = conn.prepareStatement("SELECT * from pooProduto where " +
+                                                 "codigo = ?");
             
-            ps.setString(1, sigla);
+            ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
            
             if (rs.next() == true) {
-                d = new Departamento (sigla, rs.getString("Nome_Dep"));
+                p = new Produto (codigo, rs.getString("descricao"));
+                p.setQtdeEstoque(rs.getDouble("qtdeEstoque"));
+                p.setUnidadeMedida(rs.getString("unidadeMedida"));
+                p.setPreco(rs.getDouble("preco"));
+                p.setEstoqueMinimo(rs.getDouble("estoqueMinimo"));
             }
         }
         catch (SQLException ex) { 
              System.out.println(ex.toString());   
         }
-        return (d);
+        return (p);
     }    
      
-     public void excluir(Departamento departamento) {
+     public void excluir(Produto produto) {
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("DELETE FROM tbdepartamento where Sigla_Dep = ?");
+            ps = conn.prepareStatement("DELETE FROM pooProduto where codigo = ?");
             
-            ps.setString(1, departamento.getSigla());
+            ps.setString(1, produto.getCodigo());
                       
             ps.execute();
         } catch (SQLException ex) {

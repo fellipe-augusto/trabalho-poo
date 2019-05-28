@@ -37,7 +37,11 @@ public class Produto {
     public void setEstoqueMinimo(double estoqueMinimo) {
         this.estoqueMinimo = estoqueMinimo;
     }
-
+    
+    public String getCodigo() {
+        return codigo;
+    }
+    
     public String getDescricao() {
         return descricao;
     }
