@@ -37,4 +37,12 @@ public class ItemPedido {
     public double calcValorItemPedido(){
         return produto.getPreco() * qtdeVendida;
     }
+    
+    public Produto getProduto() {
+        return produto;
+    }
+    
+    public Pedido getPedido() {
+        return pedido;
+    }
 }
