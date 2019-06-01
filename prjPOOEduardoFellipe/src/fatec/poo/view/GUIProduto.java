@@ -5,6 +5,10 @@
  */
 package fatec.poo.view;
 
+import fatec.poo.control.Conexao;
+import fatec.poo.control.DaoProduto;
+import fatec.poo.model.Produto;
+
 /**
  *
  * @author Fellipe
@@ -43,8 +47,16 @@ public class GUIProduto extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Código");
 
@@ -70,6 +82,11 @@ public class GUIProduto extends javax.swing.JFrame {
         btnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/add.png"))); // NOI18N
         btnIncluir.setText("Incluir");
         btnIncluir.setEnabled(false);
+        btnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Alterar.png"))); // NOI18N
         btnAlterar.setText("Alterar");
@@ -168,6 +185,22 @@ public class GUIProduto extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        conexao = new Conexao("Dimas","A12345678a");
+        conexao.setDriver("oracle.jdbc.driver.OracleDriver");
+        conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
+        daoProduto = new DaoProduto(conexao.conectar());
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        conexao.fecharConexao();
+        dispose();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+        
+    }//GEN-LAST:event_btnIncluirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,4 +253,8 @@ public class GUIProduto extends javax.swing.JFrame {
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQtdeEstoque;
     // End of variables declaration//GEN-END:variables
+    private Conexao conexao=null;
+    private DaoProduto daoProduto=null;
+    private Produto produto=null;
 }
+
