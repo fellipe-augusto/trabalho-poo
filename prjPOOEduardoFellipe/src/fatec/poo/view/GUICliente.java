@@ -279,6 +279,7 @@ public class GUICliente extends javax.swing.JFrame {
         String cpf = txtCpf.getText().replaceAll("[.-]", "");
         if(Pessoa.validarCpf(cpf) == false){
             JOptionPane.showMessageDialog(null, "CPF Inválido!");
+            txtCpf.requestFocus();
         }
         else {
             cliente = null;
