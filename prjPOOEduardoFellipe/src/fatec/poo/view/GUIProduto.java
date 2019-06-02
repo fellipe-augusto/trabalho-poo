@@ -8,6 +8,7 @@ package fatec.poo.view;
 import fatec.poo.control.Conexao;
 import fatec.poo.control.DaoProduto;
 import fatec.poo.model.Produto;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,9 +30,7 @@ public class GUIProduto extends javax.swing.JFrame {
     private DaoProduto daoProduto=null;
     private Produto produto=null;
     private Conexao conexao=null;
-    
-    
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -252,6 +251,17 @@ public class GUIProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        
+        try {
+                Integer.parseInt(txtCodigo.getText());
+                
+            } catch(NumberFormatException ex) {
+                txtCodigo.setText("");
+                txtCodigo.requestFocus();
+                JOptionPane.showMessageDialog(null, "Insira apenas números!","Atenção", JOptionPane.INFORMATION_MESSAGE);
+            return;
+            }
+        
         produto = null;
         produto = daoProduto.consultar(txtCodigo.getText());
         
@@ -290,7 +300,7 @@ public class GUIProduto extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         
-        if (JOptionPane.showConfirmDialog(null, "Confirma Exclusão?") == 0){
+        if(JOptionPane.showConfirmDialog(null, "Confirma a exclusão?", "Exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
             daoProduto.excluir(produto);
             
             txtCodigo.setText("");
@@ -312,7 +322,8 @@ public class GUIProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Confirma Alteração?")== 0){//Sim
+        
+        if(JOptionPane.showConfirmDialog(null, "Confirma a alteração?", "Alteração", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
            produto.setDescricao(txtDescricao.getText());
            produto.setQtdeEstoque(Double.parseDouble(txtQtdeEstoque.getText()));
            produto.setPreco(Double.parseDouble(txtPreco.getText()));
