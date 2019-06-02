@@ -278,7 +278,7 @@ public class GUICliente extends javax.swing.JFrame {
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         String cpf = txtCpf.getText().replaceAll("[.-]", "");
         if(Pessoa.validarCpf(cpf) == false){
-            JOptionPane.showMessageDialog(null, "CPF Inválido!");
+            JOptionPane.showMessageDialog(null, "CPF Inválido!","Erro", JOptionPane.WARNING_MESSAGE);
             txtCpf.requestFocus();
         }
         else {
@@ -301,6 +301,7 @@ public class GUICliente extends javax.swing.JFrame {
                 btnIncluir.setEnabled(true);
             }
             else {
+                txtCpf.setEnabled(false);
                 txtNome.setEnabled(true);
                 txtEndereco.setEnabled(true);
                 txtCidade.setEnabled(true);
@@ -309,6 +310,7 @@ public class GUICliente extends javax.swing.JFrame {
                 txtTelefone.setEnabled(true);
                 txtCep.setEnabled(true);
                 txtLimiteCred.setEnabled(true);
+                txtNome.requestFocus();
                 txtNome.setText(cliente.getNome());
                 txtEndereco.setText(cliente.getEndereco());
                 txtCidade.setText(cliente.getCidade());
@@ -329,7 +331,8 @@ public class GUICliente extends javax.swing.JFrame {
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
         String cpf = txtCpf.getText().replaceAll("[.-]", "");
         if(Pessoa.validarCpf(cpf) == false){
-            JOptionPane.showMessageDialog(null, "CPF Inválido!");
+            JOptionPane.showMessageDialog(null, "CPF Inválido!","Atenção", JOptionPane.WARNING_MESSAGE);
+            txtCpf.requestFocus();
         }
         else {
             cliente = new Cliente(txtCpf.getText().replaceAll("[.-]", ""),txtNome.getText(),Double.parseDouble(txtLimiteCred.getText()));
@@ -437,11 +440,18 @@ public class GUICliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //*******************BLOCO PARA CONECTAR COM O ORACLE
+        
         conexao = new Conexao("Dimas","A12345678a");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoCliente = new DaoCliente(conexao.conectar());
+        
+        /*
+        conexao = new Conexao("SYSTEM","");
+        conexao.setDriver("oracle.jdbc.driver.OracleDriver");
+        conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
+        daoCliente = new DaoCliente(conexao.conectar());
+        */
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
         /*conexao = new Conexao("root","");

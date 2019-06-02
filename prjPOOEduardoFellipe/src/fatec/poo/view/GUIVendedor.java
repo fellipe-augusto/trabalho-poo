@@ -66,6 +66,9 @@ public class GUIVendedor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Vendedor");
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -275,7 +278,7 @@ public class GUIVendedor extends javax.swing.JFrame {
         
         String cpf = txtCpf.getText().replaceAll("[.-]", "");
         if(Pessoa.validarCpf(cpf) == false){
-            JOptionPane.showMessageDialog(null, "CPF Inválido!");
+            JOptionPane.showMessageDialog(null, "CPF Inválido!","Atenção", JOptionPane.WARNING_MESSAGE);
             txtCpf.requestFocus();
         }
         else {
@@ -299,6 +302,7 @@ public class GUIVendedor extends javax.swing.JFrame {
                 btnIncluir.setEnabled(true);
             }
             else {
+                txtCpf.setEnabled(false);
                 txtNome.setEnabled(true);
                 txtEndereco.setEnabled(true);
                 txtCidade.setEnabled(true);
@@ -330,7 +334,8 @@ public class GUIVendedor extends javax.swing.JFrame {
 
         String cpf = txtCpf.getText().replaceAll("[.-]", "");
         if(Pessoa.validarCpf(cpf) == false){
-            JOptionPane.showMessageDialog(null, "CPF Inválido!");
+            JOptionPane.showMessageDialog(null, "CPF Inválido!","Atenção", JOptionPane.WARNING_MESSAGE);
+            txtCpf.requestFocus();
         }
         else {
             vendedor = new Vendedor(txtCpf.getText().replaceAll("[.-]", ""),txtNome.getText(),Double.parseDouble(txtSalBase.getText()));
@@ -374,10 +379,18 @@ public class GUIVendedor extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //*******************BLOCO PARA CONECTAR COM O ORACLE
+        
         conexao = new Conexao("Dimas","A12345678a");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoVendedor = new DaoVendedor(conexao.conectar());
+        
+        /*
+        conexao = new Conexao("SYSTEM","Fe78951230");
+        conexao.setDriver("oracle.jdbc.driver.OracleDriver");
+        conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
+        daoVendedor = new DaoVendedor(conexao.conectar());
+        */
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
         /*conexao = new Conexao("root","");
@@ -459,6 +472,11 @@ public class GUIVendedor extends javax.swing.JFrame {
             btnExcluir.setEnabled(false);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        conexao.fecharConexao();
+        dispose();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

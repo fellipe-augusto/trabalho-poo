@@ -205,11 +205,17 @@ public class GUIProduto extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-        //*******************BLOCO PARA CONECTAR COM O ORACLE
         conexao = new Conexao("Dimas","A12345678a");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoProduto = new DaoProduto(conexao.conectar());
+        
+        /*
+        conexao = new Conexao("SYSTEM","");
+        conexao.setDriver("oracle.jdbc.driver.OracleDriver");
+        conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
+        daoProduto = new DaoProduto(conexao.conectar());
+        */
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
         /*conexao = new Conexao("root","");
@@ -258,8 +264,8 @@ public class GUIProduto extends javax.swing.JFrame {
             } catch(NumberFormatException ex) {
                 txtCodigo.setText("");
                 txtCodigo.requestFocus();
-                JOptionPane.showMessageDialog(null, "Insira apenas números!","Atenção", JOptionPane.INFORMATION_MESSAGE);
-            return;
+                JOptionPane.showMessageDialog(null, "Insira apenas números!","Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
             }
         
         produto = null;
@@ -271,7 +277,7 @@ public class GUIProduto extends javax.swing.JFrame {
            txtQtdeEstoque.setEnabled(true);
            txtPreco.setEnabled(true);
            txtEstoqueMinimo.setEnabled(true);
-           txtCodigo.requestFocus();
+           txtDescricao.requestFocus();
            
            btnConsultar.setEnabled(false);
            btnIncluir.setEnabled(true);
