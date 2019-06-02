@@ -10,7 +10,7 @@ ddd varchar2 (2),
 telefone varchar2 (10),
 limiteCred number(8,2),
 limiteDisp number(8,2)
-)
+);
 ALTER TABLE pooCliente
 ADD CONSTRAINT PK_CPF_CLIENTE
 PRIMARY KEY(cpf);
@@ -24,9 +24,9 @@ uf  varchar2 (2),
 cep  varchar2 (8),
 ddd varchar2 (2),
 telefone varchar2 (10),
-salarioBase number(8),
-taxaComissao number(8)
-)
+salarioBase number(8,2),
+taxaComissao number(8,2)
+);
 ALTER TABLE pooVendedor
 ADD CONSTRAINT PK_CPF_VENDEDOR
 PRIMARY KEY(cpf);
@@ -39,7 +39,7 @@ formaPagto number (1),
 situacao number (1),
 cpfCliente varchar2 (11),
 cpfVendedor varchar2 (11)
-)
+);
 ALTER TABLE pooPedido
 ADD CONSTRAINT PK_NUMERO
 PRIMARY KEY(numero);
@@ -57,7 +57,7 @@ sequencia number (5),
 qtdeVendida number(8,2),
 numeroPedido varchar2 (7),
 codigoProduto varchar2 (7)
-)
+);
 ALTER TABLE pooItemPedido
 ADD CONSTRAINT PK_PEDIDO_PRODUTO
 PRIMARY KEY(numeroPedido, codigoProduto);
@@ -69,7 +69,7 @@ qtdeEstoque number (8,2),
 unidadeMedida varchar2 (2),
 preco number (8,2),
 estoqueMinimo number (8,2)
-)
+);
 ALTER TABLE pooProduto
 ADD CONSTRAINT PK_CODIGO
 PRIMARY KEY(codigo);
