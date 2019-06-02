@@ -207,16 +207,16 @@ public class GUIProduto extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
         //*******************BLOCO PARA CONECTAR COM O ORACLE
-        conexao = new Conexao("Dimas","A12345678a");
+        /*conexao = new Conexao("Dimas","A12345678a");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
-        daoProduto = new DaoProduto(conexao.conectar());
+        daoProduto = new DaoProduto(conexao.conectar());*/
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
-        /*conexao = new Conexao("root","");
+        conexao = new Conexao("root","");
         conexao.setDriver("com.mysql.jdbc.Driver");
         conexao.setConnectionString("jdbc:mysql://localhost/bd_poo");
-        daoProduto = new DaoProduto(conexao.conectar());*/
+        daoProduto = new DaoProduto(conexao.conectar());
         
     }//GEN-LAST:event_formWindowOpened
 
