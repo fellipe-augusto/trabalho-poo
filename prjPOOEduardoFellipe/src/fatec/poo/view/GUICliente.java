@@ -356,7 +356,7 @@ public class GUICliente extends javax.swing.JFrame {
             txtNome.setText("");
             txtEndereco.setText("");
             txtCidade.setText("");
-            cbxUf.setSelectedItem("");
+            cbxUf.setSelectedIndex(0);
             txtDdd.setText("");
             txtTelefone.setText("");
             txtCep.setText("");
@@ -368,7 +368,7 @@ public class GUICliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Confirma Alteração?")== 0){
+        if(JOptionPane.showConfirmDialog(null, "Confirma a alteração", "Alteração", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
             cliente.setNome(txtNome.getText());
             cliente.setEndereco(txtEndereco.getText());
             cliente.setCidade(txtCidade.getText());
@@ -393,7 +393,7 @@ public class GUICliente extends javax.swing.JFrame {
             txtNome.setText("");
             txtEndereco.setText("");
             txtCidade.setText("");
-            cbxUf.setSelectedItem("");
+            cbxUf.setSelectedIndex(0);
             txtDdd.setText("");
             txtTelefone.setText("");
             txtCep.setText("");
@@ -407,7 +407,7 @@ public class GUICliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Confirma Exclusão?")== 0){
+        if(JOptionPane.showConfirmDialog(null, "Confirma a exclusão?", "Exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
             daoCliente.excluir(cliente);
             
             txtCpf.setEnabled(true);
@@ -423,7 +423,7 @@ public class GUICliente extends javax.swing.JFrame {
             txtNome.setText("");
             txtEndereco.setText("");
             txtCidade.setText("");
-            cbxUf.setSelectedItem("");
+            cbxUf.setSelectedIndex(0);
             txtDdd.setText("");
             txtTelefone.setText("");
             txtCep.setText("");
@@ -437,10 +437,17 @@ public class GUICliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        conexao = new Conexao("SYSTEM","Fe78951230");
+        //*******************BLOCO PARA CONECTAR COM O ORACLE
+        conexao = new Conexao("Dimas","A12345678a");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
-        conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
+        conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoCliente = new DaoCliente(conexao.conectar());
+        
+        //*******************BLOCO PARA CONECTAR COM O MYSQL
+        /*conexao = new Conexao("root","");
+        conexao.setDriver("com.mysql.jdbc.Driver");
+        conexao.setConnectionString("jdbc:mysql://localhost/bd_poo");
+        daoCliente = new DaoCliente(conexao.conectar());*/
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
