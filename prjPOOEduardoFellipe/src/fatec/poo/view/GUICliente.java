@@ -269,6 +269,7 @@ public class GUICliente extends javax.swing.JFrame {
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAlterar, btnConsultar, btnExcluir, btnIncluir, btnSair});
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -319,6 +320,7 @@ public class GUICliente extends javax.swing.JFrame {
                 txtTelefone.setText(cliente.getTelefone());
                 txtCep.setText(cliente.getCep());
                 txtLimiteCred.setText(Double.toString(cliente.getLimiteCred()));
+                lblLimiteDisp.setText(Double.toString(cliente.getLimiteDisp()));
 
                 btnConsultar.setEnabled(false);
                 btnIncluir.setEnabled(false);
@@ -380,6 +382,7 @@ public class GUICliente extends javax.swing.JFrame {
             cliente.setTelefone(txtTelefone.getText());
             cliente.setCep(txtCep.getText());
             cliente.setLimiteCred(Double.parseDouble(txtLimiteCred.getText()));
+            cliente.setLimiteDisp(Double.parseDouble(txtLimiteCred.getText())); //Inicializando o limiteDisp igual ao LimiteCred conforme o PDF Trab1
            
             daoCliente.alterar(cliente);
            
@@ -401,6 +404,7 @@ public class GUICliente extends javax.swing.JFrame {
             txtTelefone.setText("");
             txtCep.setText("");
             txtLimiteCred.setText("");
+            lblLimiteDisp.setText("");
 
             btnConsultar.setEnabled(true);
             btnIncluir.setEnabled(false);
@@ -431,6 +435,7 @@ public class GUICliente extends javax.swing.JFrame {
             txtTelefone.setText("");
             txtCep.setText("");
             txtLimiteCred.setText("");
+            lblLimiteDisp.setText("");
             
             btnConsultar.setEnabled(true);
             btnIncluir.setEnabled(false);
@@ -441,7 +446,7 @@ public class GUICliente extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-        conexao = new Conexao("Dimas","A12345678a");
+        conexao = new Conexao("BD1721024","BD1721024");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoCliente = new DaoCliente(conexao.conectar());

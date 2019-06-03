@@ -26,7 +26,7 @@ public class DaoCliente {
     public void inserir(Cliente cliente) {
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("INSERT INTO pooCliente(cpf, nome, endereco, cidade, uf, cep, ddd, telefone, limiteCred) VALUES(?,?,?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO pooCliente(cpf, nome, endereco, cidade, uf, cep, ddd, telefone, limiteCred, limiteDisp) VALUES(?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, cliente.getCpf());
             ps.setString(2, cliente.getNome());
             ps.setString(3, cliente.getEndereco());
@@ -36,6 +36,7 @@ public class DaoCliente {
             ps.setString(7, cliente.getDdd());
             ps.setString(8, cliente.getTelefone());
             ps.setDouble(9, cliente.getLimiteCred());
+            ps.setDouble(10, cliente.getLimiteDisp());
                       
             ps.execute();
         } catch (SQLException ex) {
