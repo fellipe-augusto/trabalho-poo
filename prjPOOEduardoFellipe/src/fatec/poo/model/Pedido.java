@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Pedido {
     private String numero;
     private String dataEmissao;
+    private String dataPagto;
     private boolean formaPagto;
     private boolean situacao;
     private Cliente cliente;
@@ -23,6 +24,14 @@ public class Pedido {
 
     public void setDataEmissao(String dataEmissao) {
         this.dataEmissao = dataEmissao;
+    }
+    
+    public void setDataPagto(String dataPagto) {
+        this.dataPagto = dataPagto;
+    }
+
+    public String getDataPagto() {
+        return dataPagto;
     }
 
     public void setFormaPagto(boolean formaPagto) {
