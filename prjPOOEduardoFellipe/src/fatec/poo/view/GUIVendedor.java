@@ -387,7 +387,7 @@ public class GUIVendedor extends javax.swing.JFrame {
         daoVendedor = new DaoVendedor(conexao.conectar());
         
         /*
-        conexao = new Conexao("SYSTEM","Fe78951230");
+        conexao = new Conexao("SYSTEM","");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
         daoVendedor = new DaoVendedor(conexao.conectar());
