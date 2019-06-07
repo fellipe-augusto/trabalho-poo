@@ -81,6 +81,11 @@ public class GUIMenu extends javax.swing.JFrame {
         jMenuPedido.setText("Pedido");
 
         jMenuItemEmitirPedido.setText("Emitir Pedido");
+        jMenuItemEmitirPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEmitirPedidoActionPerformed(evt);
+            }
+        });
         jMenuPedido.add(jMenuItemEmitirPedido);
 
         jMenuBar1.add(jMenuPedido);
@@ -117,6 +122,10 @@ public class GUIMenu extends javax.swing.JFrame {
     private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItemSairActionPerformed
+
+    private void jMenuItemEmitirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEmitirPedidoActionPerformed
+        new GUIEmitirPedido().setVisible(true);
+    }//GEN-LAST:event_jMenuItemEmitirPedidoActionPerformed
 
     /**
      * @param args the command line arguments
