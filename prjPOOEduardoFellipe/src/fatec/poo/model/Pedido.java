@@ -61,9 +61,15 @@ public class Pedido {
     public void setCliente(Cliente c){
         this.cliente = c;
     }
+    public Cliente getCliente() {
+        return cliente;
+    }
     
     public void setVendedor(Vendedor v){
         this.vendedor = v;
+    }
+    public Vendedor getVendedor() {
+        return vendedor;
     }
     
     public void addItemPedido(ItemPedido ip){

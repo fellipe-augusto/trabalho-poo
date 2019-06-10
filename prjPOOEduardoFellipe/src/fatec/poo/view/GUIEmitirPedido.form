@@ -11,8 +11,12 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -38,8 +42,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="btnIncluir" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnAlterar" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -47,7 +51,7 @@
               <Component id="btnExcluir" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnSair" linkSize="1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,21 +59,21 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" pref="97" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jPanel5" min="-2" pref="280" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jPanel5" min="-2" pref="322" max="-2" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnIncluir" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAlterar" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnExcluir" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSair" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -109,17 +113,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnConsultarPedido" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnConsultarPedido" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtDataEmissao" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
+              <Component id="jPanel2" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -137,6 +141,9 @@
               <Image iconType="3" name="/fatec/poo/view/icon/pesq.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultarPedidoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -148,6 +155,7 @@
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="##/##/####" subtype="-1" type="5"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -179,7 +187,7 @@
                           <Component id="rdbVista" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rdbPrazo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -190,7 +198,9 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btgrFormaPgto"/>
                 </Property>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="A Vista"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdbPrazo">
@@ -199,6 +209,7 @@
                   <ComponentRef name="btgrFormaPgto"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="A Prazo"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -258,6 +269,7 @@
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="###.###.###-##" subtype="-1" type="5"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnConsultarCli">
@@ -265,9 +277,13 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/fatec/poo/view/icon/pesq.png"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNomeCli">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -324,6 +340,7 @@
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="###.###.###-##" subtype="-1" type="5"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnConsultarVend">
@@ -331,9 +348,13 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/fatec/poo/view/icon/pesq.png"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNomeVend">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -443,15 +464,22 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCodigo">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnConsultarProd">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/fatec/poo/view/icon/pesq.png"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtQtdeVendida">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -459,6 +487,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDescricao">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnAddItem">
           <Properties>
@@ -466,6 +497,7 @@
               <Image iconType="3" name="/fatec/poo/view/icon/add.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Adicionar Item"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnRmvItem">
@@ -474,6 +506,7 @@
               <Image iconType="3" name="/fatec/poo/view/icon/rem.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Remover Item"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -494,6 +527,7 @@
                     <Column editable="true" title="Sub-Total" type="java.lang.Object"/>
                   </Table>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -504,6 +538,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtValorTotPedido">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -511,6 +548,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtQtdeItemPedido">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -520,6 +560,7 @@
           <Image iconType="3" name="/fatec/poo/view/icon/save.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Incluir"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnAlterar">
@@ -528,6 +569,7 @@
           <Image iconType="3" name="/fatec/poo/view/icon/Alterar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Alterar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnExcluir">
@@ -536,6 +578,7 @@
           <Image iconType="3" name="/fatec/poo/view/icon/Eraser.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Excluir"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSair">
