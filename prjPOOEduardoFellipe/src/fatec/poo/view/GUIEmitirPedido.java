@@ -6,15 +6,15 @@
 package fatec.poo.view;
 
 import fatec.poo.control.Conexao;
-import fatec.poo.control.DaoCliente;
 import fatec.poo.control.DaoPedido;
 import fatec.poo.control.DaoProduto;
 import fatec.poo.control.DaoVendedor;
-import fatec.poo.model.Cliente;
 import fatec.poo.model.Pedido;
 import fatec.poo.model.Pessoa;
 import fatec.poo.model.Produto;
 import fatec.poo.model.Vendedor;
+import fatec.poo.control.DaoCliente;
+import fatec.poo.model.Cliente;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -205,8 +205,10 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCpfCli.setEnabled(false);
 
         btnConsultarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/pesq.png"))); // NOI18N
+        btnConsultarCli.setEnabled(false);
         btnConsultarCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarCliActionPerformed(evt);
@@ -256,6 +258,11 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
 
         btnConsultarVend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/pesq.png"))); // NOI18N
         btnConsultarVend.setEnabled(false);
+        btnConsultarVend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarVendActionPerformed(evt);
+            }
+        });
 
         txtNomeVend.setEnabled(false);
 
@@ -295,6 +302,11 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
 
         btnConsultarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/pesq.png"))); // NOI18N
         btnConsultarProd.setEnabled(false);
+        btnConsultarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarProdActionPerformed(evt);
+            }
+        });
 
         txtQtdeVendida.setEnabled(false);
 
@@ -476,7 +488,7 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPedidoActionPerformed
-        /*try {
+        try {
                 Integer.parseInt(txtNumero.getText());
                 
             } catch(NumberFormatException ex) {
@@ -495,10 +507,11 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
            txtDataEmissao.setEnabled(true);
            txtCpfCli.setEnabled(true);
            btnConsultarCli.setEnabled(true);
+           txtDataEmissao.requestFocus();
        }
        else{
           
-       }*/
+       }
     }//GEN-LAST:event_btnConsultarPedidoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -506,6 +519,9 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoPedido = new DaoPedido(conexao.conectar());
+        daoCliente = new DaoCliente(conexao.conectar());
+        daoVendedor = new DaoVendedor(conexao.conectar());
+        daoProduto = new DaoProduto(conexao.conectar());
         
         /*
         conexao = new Conexao("SYSTEM","");
@@ -527,6 +543,15 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void btnConsultarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarCliActionPerformed
+        
+        DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
+        df.setLenient (false); // aqui o pulo do gato
+        try {
+            df.parse(txtDataEmissao.getText());
+        } catch (ParseException ex) {
+           JOptionPane.showMessageDialog(null, "Data do pedido inválida", "Atenção", JOptionPane.ERROR_MESSAGE);
+        }
+        
         String cpf = txtCpfCli.getText().replaceAll("[.-]", "");
         if(Pessoa.validarCpf(cpf) == false){
             JOptionPane.showMessageDialog(null, "CPF Inválido!","Erro", JOptionPane.WARNING_MESSAGE);
@@ -547,44 +572,61 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
             
                 txtCpfVend.setEnabled(true);
                 btnConsultarVend.setEnabled(true);
+                txtCpfVend.requestFocus();
             }
         }
+    }//GEN-LAST:event_btnConsultarCliActionPerformed
 
-        
-        
-        
-        /*DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
-        df.setLenient (false); // aqui o pulo do gato
-        try {
-            df.parse(txtDataEmissao.getText());
-        } catch (ParseException ex) {
-           JOptionPane.showMessageDialog(null, "Data Inválida", "Atenção", JOptionPane.ERROR_MESSAGE);
-        }
-        try {
-        cliente = null;
-                System.out.println(txtCpfCli.getText().replaceAll("[.-]", ""));
-
-        cliente = daoCliente.consultar(txtCpfCli.getText().replaceAll("[.-]", ""));
-        
-        if (cliente == null) {
-               JOptionPane.showMessageDialog(null, "Cliente não encontrado", "Atenção", JOptionPane.WARNING_MESSAGE);
+    private void btnConsultarVendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarVendActionPerformed
+        String cpf = txtCpfVend.getText().replaceAll("[.-]", "");
+        if(Pessoa.validarCpf(cpf) == false){
+            JOptionPane.showMessageDialog(null, "CPF Inválido!","Atenção", JOptionPane.WARNING_MESSAGE);
+            txtCpfVend.requestFocus();
         }
         else {
-            txtDataEmissao.setEnabled(false);
-            txtNomeCli.setText(cliente.getNome());
-            txtCpfCli.setEnabled(false);
-            btnConsultarCli.setEnabled(false);
+            vendedor = null;
+            vendedor = daoVendedor.consultar(txtCpfVend.getText().replaceAll("[.-]", ""));
+
+            if (vendedor == null) {
+                JOptionPane.showMessageDialog(null, "Vendedor não encontrado", "Atenção", JOptionPane.WARNING_MESSAGE);
+            }
+            else {
+                txtNomeVend.setText(vendedor.getNome());
+                txtCpfVend.setEnabled(false);
+                txtCodigo.setEnabled(true);
+                btnConsultarProd.setEnabled(true);
+                txtCodigo.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnConsultarVendActionPerformed
+
+    private void btnConsultarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarProdActionPerformed
+            try {
+                Integer.parseInt(txtCodigo.getText());
+                
+            } catch(NumberFormatException ex) {
+                txtCodigo.setText("");
+                txtCodigo.requestFocus();
+                JOptionPane.showMessageDialog(null, "Insira apenas números!","Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             
-           txtCpfVend.setEnabled(true);
-           btnConsultarVend.setEnabled(true);
-           
-        }   
-        
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }*/
-        
-    }//GEN-LAST:event_btnConsultarCliActionPerformed
+            produto = null;
+            produto = daoProduto.consultar(txtCodigo.getText());
+
+            if (produto == null) {
+                JOptionPane.showMessageDialog(null, "Produto não encontrado", "Atenção", JOptionPane.WARNING_MESSAGE);
+            }
+            else {
+                txtDescricao.setText(produto.getDescricao());
+                txtCodigo.setEnabled(false);
+                btnAddItem.setEnabled(true);
+                btnRmvItem.setEnabled(true);
+                txtQtdeVendida.setEnabled(true);
+                txtQtdeVendida.requestFocus();
+                tblItemPedido.setEnabled(true);
+            }
+    }//GEN-LAST:event_btnConsultarProdActionPerformed
 
     /**
      * @param args the command line arguments
