@@ -34,8 +34,7 @@ public class DaoPedido {
             ps.setBoolean(4, pedido.isFormaPagto());
             ps.setBoolean(5, pedido.isSituacao());
             ps.setString(6, pedido.getCliente().getCpf());
-            ps.setString(7, pedido.getVendedor().getCpf());
-                      
+            ps.setString(7, pedido.getVendedor().getCpf());        
             ps.execute();
         } catch (SQLException ex) {
              System.out.println(ex.toString());   
@@ -55,7 +54,6 @@ public class DaoPedido {
             ps.setString(5, pedido.getCliente().getCpf());
             ps.setString(6, pedido.getVendedor().getCpf());
             ps.setString(7, pedido.getNumero());
-           
             ps.execute();
         } catch (SQLException ex) {
              System.out.println(ex.toString());   

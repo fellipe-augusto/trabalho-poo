@@ -43,12 +43,12 @@ public class DaoItemPedido {
     public void alterar(ItemPedido itemPedido) {
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement("UPDATE pooItemPedido set qtdeVendida = ?, numeroPedido = ?, codigoProduto = ?" +
-                                                 "where sequencia = ?");
+            ps = conn.prepareStatement("UPDATE pooItemPedido set qtdeVendida = ?, codigoProduto = ? " +
+                                                 "where numeroPedido = ? AND sequencia = ?");
             
             ps.setDouble(1, itemPedido.getQtdeVendida());
-            ps.setString(2, itemPedido.getPedido().getNumero());
-            ps.setString(3, itemPedido.getProduto().getCodigo());
+            ps.setString(2, itemPedido.getProduto().getCodigo());
+            ps.setString(3, itemPedido.getPedido().getNumero());
             ps.setInt(4, itemPedido.getSequencia());
            
             ps.execute();
@@ -57,7 +57,7 @@ public class DaoItemPedido {
         }
     }
     
-    public ItemPedido consultar (String numero) {
+    public ItemPedido consultar (String numero) { //Verificar se está OK
         ItemPedido ip = null;
        
         PreparedStatement ps = null;
@@ -68,17 +68,28 @@ public class DaoItemPedido {
             ps.setString(1, numero);
             ResultSet rs = ps.executeQuery();
            
-            /*while(rs.next() == true) {
+            while(rs.next() == true) {
                 ip = new ItemPedido (rs.getInt("sequencia"), rs.getDouble("qtdeVendida"), new DaoProduto(conn).consultar(rs.getString("codigoProduto")));
-                ip.setFormaPagto(rs.getBoolean("formaPagto"));
-                ip.setSituacao(rs.getBoolean("situacao"));
-                ip.setCliente(new DaoCliente(conn).consultar(rs.getString("cpfCliente")));
-                ip.setVendedor(new DaoVendedor(conn).consultar(rs.getString("cpfVendedor")));
-            }*/
+                ip.setPedido(new DaoPedido(conn).consultar(rs.getString("numero")));
+                ip.getPedido().addItemPedido(ip);
+            }
         }
         catch (SQLException ex) { 
              System.out.println(ex.toString());
         }
         return (ip);
+    }
+    public void excluir(ItemPedido itemPedido) {
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("DELETE FROM pooItemPedido where numeroPedido = ? AND sequencia = ?");
+            
+            ps.setString(1, itemPedido.getPedido().getNumero());
+            ps.setInt(2, itemPedido.getSequencia());
+                      
+            ps.execute();
+        } catch (SQLException ex) {
+             System.out.println(ex.toString());   
+        }
     }
 }

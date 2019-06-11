@@ -6,8 +6,19 @@
 package fatec.poo.view;
 
 import fatec.poo.control.Conexao;
+import fatec.poo.control.DaoCliente;
+import fatec.poo.control.DaoPedido;
 import fatec.poo.control.DaoProduto;
+import fatec.poo.control.DaoVendedor;
+import fatec.poo.model.Cliente;
+import fatec.poo.model.Pedido;
+import fatec.poo.model.Pessoa;
 import fatec.poo.model.Produto;
+import fatec.poo.model.Vendedor;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,9 +41,21 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     
+    
+    private Conexao conexao=null;
+    
+    private DaoPedido daoPedido=null;
+    private Pedido pedido=null;
+    
+    private DaoVendedor daoVendedor=null;
+    private Vendedor vendedor=null;
+    
     private DaoProduto daoProduto=null;
     private Produto produto=null;
-    private Conexao conexao=null;
+    
+    private DaoCliente daoCliente=null;
+    private Cliente cliente=null;
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -182,10 +205,13 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtCpfCli.setEnabled(false);
 
         btnConsultarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/pesq.png"))); // NOI18N
-        btnConsultarCli.setEnabled(false);
+        btnConsultarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarCliActionPerformed(evt);
+            }
+        });
 
         txtNomeCli.setEnabled(false);
 
@@ -450,14 +476,36 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPedidoActionPerformed
+        /*try {
+                Integer.parseInt(txtNumero.getText());
+                
+            } catch(NumberFormatException ex) {
+                txtNumero.setText("");
+                txtNumero.requestFocus();
+                JOptionPane.showMessageDialog(null, "Insira apenas números!","Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+        }
+
+        pedido = null;
+        pedido = daoPedido.consultar(txtNumero.getText());
         
+        if (pedido == null){
+           txtNumero.setEnabled(false);
+           btnConsultarPedido.setEnabled(false);
+           txtDataEmissao.setEnabled(true);
+           txtCpfCli.setEnabled(true);
+           btnConsultarCli.setEnabled(true);
+       }
+       else{
+          
+       }*/
     }//GEN-LAST:event_btnConsultarPedidoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         conexao = new Conexao("BD1721024","BD1721024");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
-        daoProduto = new DaoProduto(conexao.conectar());
+        daoPedido = new DaoPedido(conexao.conectar());
         
         /*
         conexao = new Conexao("SYSTEM","");
@@ -477,6 +525,66 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         conexao.fecharConexao();
         dispose();
     }//GEN-LAST:event_formWindowClosed
+
+    private void btnConsultarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarCliActionPerformed
+        String cpf = txtCpfCli.getText().replaceAll("[.-]", "");
+        if(Pessoa.validarCpf(cpf) == false){
+            JOptionPane.showMessageDialog(null, "CPF Inválido!","Erro", JOptionPane.WARNING_MESSAGE);
+            txtCpfCli.requestFocus();
+        }
+        else {
+            cliente = null;
+            cliente = daoCliente.consultar(txtCpfCli.getText().replaceAll("[.-]", ""));
+
+            if (cliente == null) {
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado", "Atenção", JOptionPane.WARNING_MESSAGE);
+            }
+            else {
+                txtDataEmissao.setEnabled(false);
+                txtNomeCli.setText(cliente.getNome());
+                txtCpfCli.setEnabled(false);
+                btnConsultarCli.setEnabled(false);
+            
+                txtCpfVend.setEnabled(true);
+                btnConsultarVend.setEnabled(true);
+            }
+        }
+
+        
+        
+        
+        /*DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
+        df.setLenient (false); // aqui o pulo do gato
+        try {
+            df.parse(txtDataEmissao.getText());
+        } catch (ParseException ex) {
+           JOptionPane.showMessageDialog(null, "Data Inválida", "Atenção", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+        cliente = null;
+                System.out.println(txtCpfCli.getText().replaceAll("[.-]", ""));
+
+        cliente = daoCliente.consultar(txtCpfCli.getText().replaceAll("[.-]", ""));
+        
+        if (cliente == null) {
+               JOptionPane.showMessageDialog(null, "Cliente não encontrado", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+        else {
+            txtDataEmissao.setEnabled(false);
+            txtNomeCli.setText(cliente.getNome());
+            txtCpfCli.setEnabled(false);
+            btnConsultarCli.setEnabled(false);
+            
+           txtCpfVend.setEnabled(true);
+           btnConsultarVend.setEnabled(true);
+           
+        }   
+        
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }*/
+        
+    }//GEN-LAST:event_btnConsultarCliActionPerformed
 
     /**
      * @param args the command line arguments

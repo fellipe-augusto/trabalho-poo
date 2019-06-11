@@ -82,9 +82,9 @@ public class DaoProduto {
              System.out.println(ex.toString());   
         }
         return (p);
-    }    
+    }
      
-     public void excluir(Produto produto) {
+    public void excluir(Produto produto) {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement("DELETE FROM pooProduto where codigo = ?");

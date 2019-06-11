@@ -67,7 +67,7 @@ public class DaoCliente {
         }
     }
         
-     public  Cliente consultar (String cpf) {
+     public Cliente consultar (String cpf) {
         Cliente c = null;
        
         PreparedStatement ps = null;
