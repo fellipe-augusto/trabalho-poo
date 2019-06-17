@@ -71,13 +71,30 @@ public class Pedido {
     public Vendedor getVendedor() {
         return vendedor;
     }
-    
+
+    public ArrayList<ItemPedido> getItensPedido() {
+        return itensPedido;
+    }
+
+    public void setItensPedido(ArrayList<ItemPedido> itensPedido) {
+        this.itensPedido = itensPedido;
+    }
+ 
     public void addItemPedido(ItemPedido ip){
         itensPedido.add(ip);
         ip.setPedido(this);
         
         if(formaPagto == true){
             cliente.setLimiteDisp(ip.calcValorItemPedido());
+        }
+    }
+    
+    public void listar(){
+  
+        for(int x =0; x < itensPedido.size();x++){
+            System.out.print(itensPedido.get(x).getSequencia());
+            System.out.print("\t\t" + itensPedido.get(x).getQtdeVendida());
+            System.out.print("\t\t" + itensPedido.get(x).getProduto().getDescricao());
         }
     }
 }

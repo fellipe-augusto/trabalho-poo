@@ -14,12 +14,17 @@ import fatec.poo.model.Pessoa;
 import fatec.poo.model.Produto;
 import fatec.poo.model.Vendedor;
 import fatec.poo.control.DaoCliente;
+import fatec.poo.control.DaoItemPedido;
 import fatec.poo.model.Cliente;
+import fatec.poo.model.ItemPedido;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,8 +35,11 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
     /**
      * Creates new form GUIEmitirPedido
      */
+    
+    DefaultTableModel modTblItemPedido;
     public GUIEmitirPedido() {
         initComponents();
+        modTblItemPedido = (DefaultTableModel)tblItemPedido.getModel();
     }
 
     /**
@@ -55,6 +63,11 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
     
     private DaoCliente daoCliente=null;
     private Cliente cliente=null;
+    
+    private DaoItemPedido daoItemPedido=null;
+    private ItemPedido itemPedido=null;
+    
+    int sequencia;
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -308,6 +321,7 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
             }
         });
 
+        txtQtdeVendida.setText("0");
         txtQtdeVendida.setEnabled(false);
 
         jLabel6.setText("Qtde. Vendida");
@@ -317,10 +331,20 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         btnAddItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/add.png"))); // NOI18N
         btnAddItem.setText("Adicionar Item");
         btnAddItem.setEnabled(false);
+        btnAddItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddItemActionPerformed(evt);
+            }
+        });
 
         btnRmvItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/rem.png"))); // NOI18N
         btnRmvItem.setText("Remover Item");
         btnRmvItem.setEnabled(false);
+        btnRmvItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRmvItemActionPerformed(evt);
+            }
+        });
 
         tblItemPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -343,10 +367,12 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
 
         jLabel7.setText("Valor Total do Pedido ");
 
+        txtValorTotPedido.setText("0.00");
         txtValorTotPedido.setEnabled(false);
 
         jLabel8.setText("Quantidade de Itens do Pedido");
 
+        txtQtdeItemPedido.setText("0");
         txtQtdeItemPedido.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -423,6 +449,11 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         btnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/save.png"))); // NOI18N
         btnIncluir.setText("Incluir");
         btnIncluir.setEnabled(false);
+        btnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Alterar.png"))); // NOI18N
         btnAlterar.setText("Alterar");
@@ -434,6 +465,11 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/exit.png"))); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -515,13 +551,13 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarPedidoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        conexao = new Conexao("BD1721024","BD1721024");
+        /*conexao = new Conexao("BD1721024","BD1721024");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoPedido = new DaoPedido(conexao.conectar());
         daoCliente = new DaoCliente(conexao.conectar());
         daoVendedor = new DaoVendedor(conexao.conectar());
-        daoProduto = new DaoProduto(conexao.conectar());
+        daoProduto = new DaoProduto(conexao.conectar());*/
         
         /*
         conexao = new Conexao("SYSTEM","");
@@ -531,10 +567,17 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         */
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
-        /*conexao = new Conexao("root","");
+        conexao = new Conexao("root","");
         conexao.setDriver("com.mysql.jdbc.Driver");
         conexao.setConnectionString("jdbc:mysql://localhost/bd_poo");
-        daoProduto = new DaoProduto(conexao.conectar());*/
+        daoProduto = new DaoProduto(conexao.conectar());
+        daoPedido = new DaoPedido(conexao.conectar());
+        daoCliente = new DaoCliente(conexao.conectar());
+        daoVendedor = new DaoVendedor(conexao.conectar());
+        daoItemPedido = new DaoItemPedido(conexao.conectar());
+        
+        sequencia = 0;
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -573,6 +616,9 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
                 txtCpfVend.setEnabled(true);
                 btnConsultarVend.setEnabled(true);
                 txtCpfVend.requestFocus();
+                
+                pedido = new Pedido(txtNumero.getText(), txtDataEmissao.getText());
+                pedido.setCliente(cliente);
             }
         }
     }//GEN-LAST:event_btnConsultarCliActionPerformed
@@ -596,6 +642,9 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
                 txtCodigo.setEnabled(true);
                 btnConsultarProd.setEnabled(true);
                 txtCodigo.requestFocus();
+                btnConsultarVend.setEnabled(false);
+                
+                pedido.setVendedor(vendedor);
             }
         }
     }//GEN-LAST:event_btnConsultarVendActionPerformed
@@ -613,11 +662,18 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
             
             produto = null;
             produto = daoProduto.consultar(txtCodigo.getText());
-
+   
             if (produto == null) {
                 JOptionPane.showMessageDialog(null, "Produto não encontrado", "Atenção", JOptionPane.WARNING_MESSAGE);
             }
             else {
+                
+                int posLinha = VerificaLinha(Integer.parseInt(txtCodigo.getText()));
+                if(posLinha >= 0) { //Cai aqui quando um produto já está nas linha
+                    JOptionPane.showMessageDialog(null, "O produto já foi adicionado.","Atenção", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            
                 txtDescricao.setText(produto.getDescricao());
                 txtCodigo.setEnabled(false);
                 btnAddItem.setEnabled(true);
@@ -625,9 +681,128 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
                 txtQtdeVendida.setEnabled(true);
                 txtQtdeVendida.requestFocus();
                 tblItemPedido.setEnabled(true);
+                btnConsultarProd.setEnabled(false);
             }
     }//GEN-LAST:event_btnConsultarProdActionPerformed
 
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
+        try {
+                Double.parseDouble(txtQtdeVendida.getText());
+                
+            } catch(NumberFormatException ex) {
+                txtQtdeVendida.setText("");
+                txtQtdeVendida.requestFocus();
+                JOptionPane.showMessageDialog(null, "Insira apenas números!","Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        
+        if(Integer.parseInt(txtQtdeVendida.getText()) <= 0) {
+            JOptionPane.showMessageDialog(null, "A quantidade a ser vendida deve ser maior que 0.","Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }  
+        
+            produto = null;
+            produto = daoProduto.consultar(txtCodigo.getText());
+      
+            if(Double.parseDouble(txtQtdeVendida.getText()) > produto.getQtdeEstoque()) {
+                JOptionPane.showMessageDialog(null, "A quantidade solicitada é maior do que a disponível em estoque.","Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            DecimalFormat df = new DecimalFormat("#0.0");
+            double subtotal = produto.getPreco() * Double.parseDouble(txtQtdeVendida.getText());
+            
+            String Linha[]= { produto.getCodigo(),
+                                produto.getDescricao(),
+                                Double.toString(produto.getPreco()),
+                                txtQtdeVendida.getText(),
+                                Double.toString(subtotal)
+            };
+
+            modTblItemPedido.addRow(Linha);
+            produto.setQtdeEstoque(produto.getQtdeEstoque() - Double.parseDouble(txtQtdeVendida.getText()));
+            sequencia++;
+            
+            itemPedido = null;
+            itemPedido = new ItemPedido(sequencia, Double.parseDouble(txtQtdeVendida.getText()), produto);
+            
+            pedido.addItemPedido(itemPedido);
+                        
+            txtCodigo.setEnabled(true);
+            txtCodigo.setText("");
+            txtCodigo.requestFocus();
+            btnConsultarProd.setEnabled(true);
+            txtDescricao.setText("");
+            txtQtdeVendida.setText("0");
+            btnAddItem.setEnabled(false);
+            btnIncluir.setEnabled(true);
+            rdbVista.setEnabled(true);
+            rdbPrazo.setEnabled(true);
+            AtualizaValoresPedido();
+    }//GEN-LAST:event_btnAddItemActionPerformed
+
+    private void btnRmvItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRmvItemActionPerformed
+        if(tblItemPedido.getSelectedRow() == -1) {
+          JOptionPane.showMessageDialog(null, "Selecione uma linha para remover.", "Atenção", JOptionPane.ERROR_MESSAGE);
+      }
+      else {
+          modTblItemPedido.removeRow(tblItemPedido.getSelectedRow());
+          AtualizaValoresPedido();
+      }
+    }//GEN-LAST:event_btnRmvItemActionPerformed
+
+    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+        
+        pedido.setDataPagto(pedido.getDataEmissao());
+        
+        if(rdbVista.isSelected()) {
+        pedido.setFormaPagto(true);
+        } else {
+            pedido.setFormaPagto(false);
+        }
+        pedido.setSituacao(true);
+        
+        daoPedido.inserir(pedido);
+        
+        for(int x=0; x < pedido.getItensPedido().size();x++){
+            
+            itemPedido.setPedido(pedido.getItensPedido().get(x).getPedido());
+            itemPedido.setProduto(pedido.getItensPedido().get(x).getProduto());
+            itemPedido.setSequencia(x+1);
+            itemPedido.setQtdeVendida(pedido.getItensPedido().get(x).getQtdeVendida());           
+            daoItemPedido.inserir(itemPedido);
+        }
+    }//GEN-LAST:event_btnIncluirActionPerformed
+
+    private void AtualizaValoresPedido() {
+        
+            double valorTotalPedido = 0;
+            int quantidadeItensPedido = 0;
+            for(int i=0;i<modTblItemPedido.getRowCount();i++) {
+                 valorTotalPedido += Double.parseDouble(String.valueOf(modTblItemPedido.getValueAt(i, 4)));
+            }
+            txtValorTotPedido.setText(Double.toString(valorTotalPedido));
+
+            for(int i=0;i<modTblItemPedido.getRowCount();i++) {
+                 quantidadeItensPedido += Double.parseDouble(String.valueOf(modTblItemPedido.getValueAt(i, 3)));
+            }
+            txtQtdeItemPedido.setText(Integer.toString(quantidadeItensPedido));
+    }
+    
+    private int VerificaLinha(int codigo) {
+
+        for(int i=0;i<modTblItemPedido.getRowCount();i++) {
+            if(codigo == Integer.parseInt(String.valueOf(modTblItemPedido.getValueAt(i, 0)))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     /**
      * @param args the command line arguments
      */

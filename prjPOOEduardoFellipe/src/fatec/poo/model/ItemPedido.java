@@ -45,4 +45,12 @@ public class ItemPedido {
     public Pedido getPedido() {
         return pedido;
     }
+
+    public void setSequencia(int sequencia) {
+        this.sequencia = sequencia;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 }
