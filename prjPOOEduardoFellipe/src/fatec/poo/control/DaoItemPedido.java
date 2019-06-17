@@ -37,6 +37,7 @@ public class DaoItemPedido {
             ps.execute();
         } catch (SQLException ex) {
              System.out.println(ex.toString());   
+             
         }
     }
     

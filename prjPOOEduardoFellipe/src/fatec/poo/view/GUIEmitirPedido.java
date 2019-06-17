@@ -551,13 +551,14 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarPedidoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        /*conexao = new Conexao("BD1721024","BD1721024");
+        conexao = new Conexao("BD1721024","BD1721024");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoPedido = new DaoPedido(conexao.conectar());
         daoCliente = new DaoCliente(conexao.conectar());
         daoVendedor = new DaoVendedor(conexao.conectar());
-        daoProduto = new DaoProduto(conexao.conectar());*/
+        daoProduto = new DaoProduto(conexao.conectar());
+        daoItemPedido = new DaoItemPedido(conexao.conectar());
         
         /*
         conexao = new Conexao("SYSTEM","");
@@ -567,14 +568,14 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         */
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
-        conexao = new Conexao("root","");
+        /*conexao = new Conexao("root","");
         conexao.setDriver("com.mysql.jdbc.Driver");
         conexao.setConnectionString("jdbc:mysql://localhost/bd_poo");
         daoProduto = new DaoProduto(conexao.conectar());
         daoPedido = new DaoPedido(conexao.conectar());
         daoCliente = new DaoCliente(conexao.conectar());
         daoVendedor = new DaoVendedor(conexao.conectar());
-        daoItemPedido = new DaoItemPedido(conexao.conectar());
+        daoItemPedido = new DaoItemPedido(conexao.conectar());*/
         
         sequencia = 0;
         
@@ -767,14 +768,11 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         pedido.setSituacao(true);
         
         daoPedido.inserir(pedido);
+        pedido.listar();
         
-        for(int x=0; x < pedido.getItensPedido().size();x++){
-            
-            itemPedido.setPedido(pedido.getItensPedido().get(x).getPedido());
-            itemPedido.setProduto(pedido.getItensPedido().get(x).getProduto());
-            itemPedido.setSequencia(x+1);
-            itemPedido.setQtdeVendida(pedido.getItensPedido().get(x).getQtdeVendida());           
-            daoItemPedido.inserir(itemPedido);
+        for(int x=0; x < pedido.getItensPedido().size();x++) {               
+            daoItemPedido.inserir(pedido.getItensPedido().get(x));
+      
         }
     }//GEN-LAST:event_btnIncluirActionPerformed
 

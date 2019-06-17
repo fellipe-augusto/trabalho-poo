@@ -92,9 +92,12 @@ public class Pedido {
     public void listar(){
   
         for(int x =0; x < itensPedido.size();x++){
-            System.out.print(itensPedido.get(x).getSequencia());
-            System.out.print("\t\t" + itensPedido.get(x).getQtdeVendida());
-            System.out.print("\t\t" + itensPedido.get(x).getProduto().getDescricao());
+            System.out.print("\n\n" + itensPedido.get(x).getSequencia());
+            System.out.print("\n" + itensPedido.get(x).getQtdeVendida());
+            System.out.print("\n" + itensPedido.get(x).getProduto().getDescricao());
+            System.out.print("\n" + itensPedido.get(x).getProduto().getCodigo());
+            System.out.print("\n" + itensPedido.size());
+            System.out.print("\n" + x);
         }
     }
 }
