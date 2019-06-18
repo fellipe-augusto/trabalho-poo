@@ -80,12 +80,20 @@ public class Pedido {
         this.itensPedido = itensPedido;
     }
  
-    public void addItemPedido(ItemPedido ip){
+    public void addItemPedido(ItemPedido ip) {
         itensPedido.add(ip);
         ip.setPedido(this);
         
         if(formaPagto == true){
-            cliente.setLimiteDisp(ip.calcValorItemPedido());
+            cliente.setLimiteDisp(cliente.getLimiteDisp() - ip.calcValorItemPedido());
+        }
+    }
+    
+    public void removerItemPedido(int pos, double valorTotal) {
+        itensPedido.remove(pos);
+        
+        if(formaPagto == true) {
+            cliente.setLimiteDisp(cliente.getLimiteDisp() + valorTotal);
         }
     }
     
