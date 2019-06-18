@@ -381,17 +381,17 @@ public class GUIVendedor extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //*******************BLOCO PARA CONECTAR COM O ORACLE
         
-        /*conexao = new Conexao("BD1721024","BD1721024");
+        conexao = new Conexao("BD1721024","BD1721024");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
-        daoVendedor = new DaoVendedor(conexao.conectar());*/
+        daoVendedor = new DaoVendedor(conexao.conectar());
         
-        
+        /*
         conexao = new Conexao("SYSTEM","Fe78951230");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
         daoVendedor = new DaoVendedor(conexao.conectar());
-        
+        */
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
         /*conexao = new Conexao("root","");

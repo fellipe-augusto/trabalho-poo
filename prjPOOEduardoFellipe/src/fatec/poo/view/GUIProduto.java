@@ -206,17 +206,17 @@ public class GUIProduto extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-        /*conexao = new Conexao("BD1721024","BD1721024");
+        conexao = new Conexao("BD1721024","BD1721024");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
-        daoProduto = new DaoProduto(conexao.conectar());*/
+        daoProduto = new DaoProduto(conexao.conectar());
         
-        
+        /*
         conexao = new Conexao("SYSTEM","Fe78951230");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
         daoProduto = new DaoProduto(conexao.conectar());
-        
+        */
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
         /*conexao = new Conexao("root","");

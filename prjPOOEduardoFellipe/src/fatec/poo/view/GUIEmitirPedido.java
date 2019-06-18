@@ -601,16 +601,16 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-        /*conexao = new Conexao("BD1721024","BD1721024");
+        conexao = new Conexao("BD1721024","BD1721024");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoPedido = new DaoPedido(conexao.conectar());
         daoCliente = new DaoCliente(conexao.conectar());
         daoVendedor = new DaoVendedor(conexao.conectar());
         daoProduto = new DaoProduto(conexao.conectar());
-        daoItemPedido = new DaoItemPedido(conexao.conectar());*/
+        daoItemPedido = new DaoItemPedido(conexao.conectar());
         
-        
+        /*
         conexao = new Conexao("SYSTEM","Fe78951230");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
@@ -619,7 +619,7 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         daoCliente = new DaoCliente(conexao.conectar());
         daoVendedor = new DaoVendedor(conexao.conectar());
         daoItemPedido = new DaoItemPedido(conexao.conectar());
-        
+        */
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
         /*conexao = new Conexao("root","");
