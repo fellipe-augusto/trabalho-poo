@@ -451,18 +451,18 @@ public class GUICliente extends javax.swing.JFrame {
         conexao.setConnectionString("jdbc:oracle:thin:@apolo:1521:xe");
         daoCliente = new DaoCliente(conexao.conectar());*/
         
-        /*
-        conexao = new Conexao("SYSTEM","");
+        
+        conexao = new Conexao("SYSTEM","Fe78951230");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
         daoCliente = new DaoCliente(conexao.conectar());
-        */
+        
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
-        conexao = new Conexao("root","");
+        /*conexao = new Conexao("root","");
         conexao.setDriver("com.mysql.jdbc.Driver");
         conexao.setConnectionString("jdbc:mysql://localhost/bd_poo");
-        daoCliente = new DaoCliente(conexao.conectar());
+        daoCliente = new DaoCliente(conexao.conectar());*/
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

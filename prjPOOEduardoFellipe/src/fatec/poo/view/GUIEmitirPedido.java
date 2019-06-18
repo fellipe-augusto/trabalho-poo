@@ -610,8 +610,8 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         daoProduto = new DaoProduto(conexao.conectar());
         daoItemPedido = new DaoItemPedido(conexao.conectar());*/
         
-        /*
-        conexao = new Conexao("SYSTEM","");
+        
+        conexao = new Conexao("SYSTEM","Fe78951230");
         conexao.setDriver("oracle.jdbc.driver.OracleDriver");
         conexao.setConnectionString("jdbc:oracle:thin:@localhost:1521:xe");
         daoProduto = new DaoProduto(conexao.conectar());
@@ -619,17 +619,17 @@ public class GUIEmitirPedido extends javax.swing.JFrame {
         daoCliente = new DaoCliente(conexao.conectar());
         daoVendedor = new DaoVendedor(conexao.conectar());
         daoItemPedido = new DaoItemPedido(conexao.conectar());
-        */
+        
         
         //*******************BLOCO PARA CONECTAR COM O MYSQL
-        conexao = new Conexao("root","");
+        /*conexao = new Conexao("root","");
         conexao.setDriver("com.mysql.jdbc.Driver");
         conexao.setConnectionString("jdbc:mysql://localhost/bd_poo");
         daoProduto = new DaoProduto(conexao.conectar());
         daoPedido = new DaoPedido(conexao.conectar());
         daoCliente = new DaoCliente(conexao.conectar());
         daoVendedor = new DaoVendedor(conexao.conectar());
-        daoItemPedido = new DaoItemPedido(conexao.conectar());
+        daoItemPedido = new DaoItemPedido(conexao.conectar());*/
         
     }//GEN-LAST:event_formWindowOpened
 
